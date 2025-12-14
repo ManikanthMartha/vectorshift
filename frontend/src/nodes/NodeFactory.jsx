@@ -70,12 +70,26 @@ export function NodeFactory({ id, data = {}, config }) {
 
     // IMAGE UPLOAD FIELD
     if (field.type === "file") {
+      const file = state[field.name];
+      const previewUrl = file ? URL.createObjectURL(file) : null;
+      
       return (
-        <input
-          type="file"
-          accept={field.accept || "*"}
-          onChange={(e) => handleFieldChange(field.name, e.target.files[0])}
-        />
+        <div className="flex flex-col gap-2">
+          <input
+            type="file"
+            accept="image/jpeg,image/jpg,image/png"
+            onChange={(e) => handleFieldChange(field.name, e.target.files[0])}
+            className="border border-gray-300 rounded-md px-2 py-1"
+          />
+          Preview:
+          {previewUrl && (
+            <img 
+              src={previewUrl} 
+              alt="Preview" 
+              className="max-w-full h-auto max-h-48 rounded-md border border-gray-300"
+            />
+          )}
+        </div>
       );
     }
 
