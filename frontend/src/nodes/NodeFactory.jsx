@@ -84,9 +84,10 @@ export function NodeFactory({ id, data = {}, config }) {
       <select
         value={state[field.name]}
         onChange={(e) => handleFieldChange(field.name, e.target.value)}
+        className="border border-gray-300 rounded-md px-2 py-1"
       >
         {field.options.map((opt) => (
-          <option key={opt.value} value={opt.value}>
+          <option key={opt.value} value={opt.value} className="px-2 py-1 font-normal text-gray-700">
             {opt.label}
           </option>
         ))}
@@ -97,6 +98,7 @@ export function NodeFactory({ id, data = {}, config }) {
         value={state[field.name]}
         placeholder={field.placeholder}
         onChange={(e) => handleFieldChange(field.name, e.target.value)}
+        className="border border-gray-300 rounded-md px-2 py-1"
       />
     );
   };
@@ -109,10 +111,10 @@ export function NodeFactory({ id, data = {}, config }) {
       style={config.style}
       handles={allHandles}
     >
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-6">
         {(config.fields || []).map((field) => (
-          <div key={field.name}>
-            <label className="text-sm">{field.label}</label>
+          <div key={field.name} className="flex flex-row gap-3 ">
+            <label className="text-base font-semibold text-gray-600">{field.label}</label>
             {renderField(field)}
           </div>
         ))}

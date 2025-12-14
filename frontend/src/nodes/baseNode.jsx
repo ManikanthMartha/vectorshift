@@ -26,8 +26,11 @@ export const BaseNode = memo(
 
     return (
       <div
-        className={`node-container bg-[#faf9f6] rounded-lg shadow-sm border p-3  relative ${className}`}
-        style={style}
+        className={`node-container bg-[#faf9f6] rounded-lg border shadow-sm p-3 relative ${className}`}
+        style={{
+          position: "relative",
+          ...style,
+        }}
       >
         {/* Header */}
         <div className="flex justify-between items-center mb-2 bg-[#eef2fe] p-2 rounded-md">
@@ -44,24 +47,63 @@ export const BaseNode = memo(
         </div>
 
         {/* Dynamic Handles */}
-        {handles.map((h, i) => (
-          <Handle
-            key={h.id || i}
-            type={h.type}
-            id={h.id}
-            position={h.position || Position.Left}
-            style={{
-              width: 16,
-              height: 16,
-              background: h.color || "#a29af3",
-              border: "2px solid white",
-              borderRadius: "50%",
-              ...h.style
-            }}
-          />
-        ))}
+        {handles.map((h, i) => {
+          const defaultTop = 20 + i * 32;
 
-        {/* Content */}
+          return (
+            <div
+              key={h.id || i}
+              style={{
+                position: "absolute",
+                top: h.style?.top ?? defaultTop,
+                left:
+                  h.position === Position.Left
+                    ? "-5px" // moves handle OUTSIDE node border
+                    : "auto",
+                right:
+                  h.position === Position.Right
+                    ? "-5px" // moves handle OUTSIDE node border
+                    : "auto",
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+                pointerEvents: "none", // Allow clicks through wrapper
+              }}
+            >
+              {/* Handle */}
+              <Handle
+                type={h.type}
+                id={h.id}
+                position={h.position}
+                style={{
+                  width: h.size || 16,
+                  height: h.size || 16,
+                  background: h.color || "#a29af3",
+                  border: "2px solid white",
+                  borderRadius: "50%",
+                  pointerEvents: "auto",
+                  ...h.style,
+                }}
+              />
+
+              {/* LABEL (if provided) */}
+              {h.label && (
+                <span
+                  style={{
+                    fontSize: "12px",
+                    color: "#333",
+                    whiteSpace: "nowrap",
+                    userSelect: "none",
+                  }}
+                >
+                  {h.label}
+                </span>
+              )}
+            </div>
+          );
+        })}
+
+        {/* Body */}
         <div className="node-content">{children}</div>
       </div>
     );

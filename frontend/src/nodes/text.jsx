@@ -1,7 +1,8 @@
 import React from 'react';
 import { NodeFactory } from './NodeFactory';
+import { Position } from 'reactflow';
 
-const HANDLE_SIZE = 18;
+const HANDLE_SIZE = 16;
 
 export const TextNode = ({ id, data }) => {
   return (
@@ -10,7 +11,7 @@ export const TextNode = ({ id, data }) => {
       data={data}
       config={{
         title: 'Text Node',
-        className: 'border-nodeborder border-2 w-80',
+        className: 'border-nodeborder border-4 w-80',
         fields: [
           { name: 'text', label: 'Text', type: 'textarea', defaultValue: '{{input}}', placeholder: 'Enter text...' },
         ],
@@ -20,11 +21,11 @@ export const TextNode = ({ id, data }) => {
           return matches.map((m, i) => ({
             id: m[1].trim(),
             type: 'target',
-            position: 'Left',
+            position: Position.Left,
             style: {
               width: `${HANDLE_SIZE}px`,
               height: `${HANDLE_SIZE}px`,
-              top: 20 + (i * 40),
+              top: 10 + (i * 20),
               background: '#a29af3',
               border: '2px solid white',
             }
@@ -35,26 +36,27 @@ export const TextNode = ({ id, data }) => {
           const matches = [...(state.text || '').matchAll(regex)];
           const vars = matches.map(m => m[1].trim());
           return (
-            <div className="relative">
+            <div className="absolute inset-0 pointer-events-none">
               {vars.map((label, i) => (
                 <span
                   key={`${id}-${label}`}
-                  className="absolute text-lg text-white whitespace-nowrap"
+                  className="absolute text-sm font-medium whitespace-nowrap pointer-events-none"
                   style={{
-                    left: '-26px',
-                    top: `${20 + (i * 20)}px`,
-                    transform: 'translateX(-100%)',
+                    left: '-35px',
+                    top: `${(i * 40)}px`,
+                    marginRight: '8px',
                     lineHeight: `${HANDLE_SIZE}px`,
+                    color: '#666',
                   }}
                 >
-                  {label}
+                  {label} 
                 </span>
               ))}
             </div>
           );
         },
+        outputs: [{ id: 'output', type: 'source', position: Position.Right }],
       }}
     />
   );
 };
-// ...existing code...
