@@ -54,9 +54,69 @@
     @apply border-border;
   }
   body {
-    @apply font-sans antialiased bg-[#1a1b1f] text-foreground;
+    @apply font-sans antialiased bg-[#12141a] text-foreground;
   }
 }
+
+.pipeline-toolbar {
+  padding: 16px;
+  background: #161922;
+  border-bottom: 1px solid #2a2f3a;
+  display: flex ;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+
+.toolbar-grid {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+
+.draggable-node {
+  width: 66px;
+  height: 58px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: grab;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.draggable-node:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  border-color: #6366f1;
+}
+
+.draggable-node:active {
+  cursor: grabbing;
+}
+
+.icon-wrapper svg {
+  position: relative;
+  top: 8px;
+  width: 20px;
+  height: 20px;
+  stroke: #111827;
+}
+
+.node-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #111827;
+}
+
 
 
 /* @tailwind base;

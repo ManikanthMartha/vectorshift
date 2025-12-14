@@ -91,7 +91,7 @@ const getInitNodeData = (nodeID, type) => {
     }, []);
 
     return (
-        <div ref={reactFlowWrapper} style={{width: '100wv', height: '70vh', background: '#1a1b1f'}}>
+        <div ref={reactFlowWrapper} style={{width: '100wv', height: '85vh'}}>
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
@@ -112,7 +112,6 @@ const getInitNodeData = (nodeID, type) => {
                   },
                   animated: true
                 }}
-                // className=" bg-[#1a1b1f]"
             >
                 <Background color="#fff" gap={gridSize} variant={BackgroundVariant.Dots} />
                 <Controls />

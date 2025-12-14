@@ -1,56 +1,26 @@
-import * as React from 'react';
-import { DraggableNode } from './draggableNode';
+import { DraggableNode } from "./draggableNode";
+import { InputIcon } from "./icons/InputIcon";
+import { OutputIcon } from "./icons/OutputIcon";
+import { TextIcon } from "./icons/TextIcon";
+import { LLMIcon } from "./icons/LLMIcon";
+import { SubmitButton } from "./submit";
+
+const TOOLBAR_NODES = [
+  { type: "customInput", label: "Input", icon: InputIcon },
+  { type: "customOutput", label: "Output", icon: OutputIcon },
+  { type: "text", label: "Text", icon: TextIcon },
+  { type: "llm", label: "LLM", icon: LLMIcon },
+];
 
 export const PipelineToolbar = () => {
-    return (
-        <div className="pipeline-toolbar" style={{ 
-            padding: '20px',
-            background: '#1a1b1f',
-        }}>
-            <div style={{ 
-                display: 'flex', 
-                flexWrap: 'wrap', 
-                gap: '32px',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                <DraggableNode 
-                    type='customInput' 
-                    label='Input'
-                    style={{
-                        backgroundColor: '#6366E9', 
-                        transition: 'all 0.2s ease-in-out',
-                        minWidth: '100px',
-                    }}
-                />
-                <DraggableNode 
-                    type='llm' 
-                    label='LLM'
-                    style={{
-                        backgroundColor: '#6366E9', 
-                        transition: 'all 0.2s ease-in-out',
-                        minWidth: '100px',
-                    }}
-                />
-                <DraggableNode 
-                    type='customOutput' 
-                    label='Output'
-                    style={{
-                        backgroundColor: '#6366E9', 
-                        transition: 'all 0.2s ease-in-out',
-                        minWidth: '100px',
-                    }}
-                />
-                <DraggableNode 
-                    type='text' 
-                    label='Text'
-                    style={{
-                        backgroundColor: '#6366E9', 
-                        transition: 'all 0.2s ease-in-out',
-                        minWidth: '100px',
-                    }}
-                />
-            </div>
-        </div>
-    );
+  return (
+    <div className="pipeline-toolbar">
+      <div className="toolbar-grid">
+        {TOOLBAR_NODES.map((node) => (
+          <DraggableNode key={node.type} {...node} />
+        ))}
+      </div>
+      <SubmitButton />
+    </div>
+  );
 };

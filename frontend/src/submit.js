@@ -43,10 +43,10 @@ export const SubmitButton = () => {
     }, [nodes, edges]);
 
     return (
-        <div className='w-full flex justify-center items-center'>
+        <div>
             <button
                 onClick={handleSubmit}
-                className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className=" bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded"
             >
                 Submit Pipeline
             </button>
