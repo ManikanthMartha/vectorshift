@@ -42,7 +42,7 @@ export const TextNode = ({ id, data }) => {
                   key={`${id}-${label}`}
                   className="absolute text-sm font-medium whitespace-nowrap pointer-events-none"
                   style={{
-                    left: '-35px',
+                    left: '-45px',
                     top: `${(i * 40)}px`,
                     marginRight: '8px',
                     lineHeight: `${HANDLE_SIZE}px`,

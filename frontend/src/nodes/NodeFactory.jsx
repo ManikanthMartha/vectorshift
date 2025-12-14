@@ -105,6 +105,29 @@ export function NodeFactory({ id, data = {}, config }) {
       );
     }
 
+    // TEXTAREA FIELD - auto-resizing
+    if (field.type === "textarea") {
+      return (
+        <textarea
+          value={state[field.name]}
+          placeholder={field.placeholder}
+          onChange={(e) => {
+            handleFieldChange(field.name, e.target.value);
+            e.target.style.height = 'auto';
+            e.target.style.height = e.target.scrollHeight + 'px';
+          }}
+          className="border border-gray-300 rounded-md px-2 py-1 w-full resize-none overflow-hidden"
+          style={{ minHeight: '60px' }}
+          ref={(el) => {
+            if (el) {
+              el.style.height = 'auto';
+              el.style.height = el.scrollHeight + 'px';
+            }
+          }}
+        />
+      );
+    }
+
     // DEFAULT INPUT / SELECT
     return field.type === "select" ? (
       <select
@@ -124,7 +147,7 @@ export function NodeFactory({ id, data = {}, config }) {
         value={state[field.name]}
         placeholder={field.placeholder}
         onChange={(e) => handleFieldChange(field.name, e.target.value)}
-        className="border border-gray-300 rounded-md px-2 py-1"
+        className="border border-gray-300 rounded-md px-2 py-1 w-full"
       />
     );
   };
