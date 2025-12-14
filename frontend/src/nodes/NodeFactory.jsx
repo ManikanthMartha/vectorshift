@@ -45,25 +45,37 @@ export function NodeFactory({ id, data = {}, config }) {
         newRows[idx] = { ...newRows[idx], [key]: value };
         handleFieldChange(field.name, newRows);
       };
+      const deleteRow = (idx) => {
+        const newRows = rows.filter((_, i) => i !== idx);
+        handleFieldChange(field.name, newRows);
+      };
       const addRow = () => handleFieldChange(field.name, [...rows, { key: "", value: "" }]);
 
       return (
-        <div className="table-editor">
+        <div className="table-editor w-full border border-gray-300 rounded-md p-2 flex flex-col gap-2">
           {rows.map((row, i) => (
             <div key={i} className="flex gap-2">
               <input
                 placeholder="Key"
                 value={row.key}
                 onChange={(e) => updateRow(i, "key", e.target.value)}
+                className="border border-gray-300 rounded-md px-2 py-1"
               />
               <input
                 placeholder="Value"
                 value={row.value}
                 onChange={(e) => updateRow(i, "value", e.target.value)}
+                className="border border-gray-300 rounded-md px-2 py-1"
               />
+              <button 
+                onClick={() => deleteRow(i)} 
+                className="border border-red-500 text-red-500 rounded-md px-2 py-1 hover:bg-red-50"
+              >
+                Delete
+              </button>
             </div>
           ))}
-          <button onClick={addRow}>Add Row</button>
+          <button onClick={addRow} className="border border-gray-600 rounded-md px-2 py-1">Add Parameter</button>
         </div>
       );
     }

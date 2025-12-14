@@ -7,10 +7,10 @@ import { LLMNode } from './nodes/llm';
 import { OutputNode } from './nodes/out';
 import { TextNode } from './nodes/text';
 import { ImageNode } from './nodes/ImageNode';
-// import { APINode } from './nodes/api';
-// import { TranslatorNode } from './nodes/translator';
+import { ApiNode } from './nodes/ApiNode';
+import { TranslatorNode } from './nodes/TranslatorNode';
 // import { ListNode } from './nodes/list';
-// import { EmailNode } from './nodes/emailValidation';
+import { EmailNode } from './nodes/EmailNode';
 
 import 'reactflow/dist/style.css';
 
@@ -22,10 +22,10 @@ const nodeTypes = {
   customOutput: OutputNode,
   text: TextNode,
   image: ImageNode,
-  // api: APINode,
-  // translator: TranslatorNode,
+  api: ApiNode,
+  translator: TranslatorNode,
+  emailValidation: EmailNode,
   // list: ListNode,
-  // emailValidation: EmailNode,
 };
 
 const selector = (state) => ({
